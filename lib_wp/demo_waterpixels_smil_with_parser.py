@@ -294,14 +294,6 @@ if __name__ == "__main__":
     
     print("Time: %f" % (end - start))
     
-    np_imout = imout.getNumArray().astype(int)
-    
-    csv_file = output + "/" + prefix + os.path.basename(os.path.splitext(image_file_name)[0]) + ".csv"
-    target = open(csv_file, "w")
-    for j in range(0, np_imout.shape[1]):
-        for i in range(0, np_imout.shape[0]):
-            target.write(str(np_imout[i, j]))
-            if i < np_imout.shape[0] - 1:
-                target.write(",")
-        target.write("\n")
-    target.close()
+    np_imout = imout.getNumArray().T.astype(int)
+    csv_fname = output + "/" + prefix + os.path.basename(os.path.splitext(image_file_name)[0]) + ".csv"
+    np.savetxt(csv_fname, np_imout, fmt='%i', delimiter=',')
