@@ -289,9 +289,9 @@ if __name__ == "__main__":
     step = math.floor(0.5 + math.sqrt(size[0]*size[1] / superpixels))
     step = int(step)
     
-    start = time.clock()
+    start = time.perf_counter()
     imout, imgrad, imminima = demo_m_waterpixels(imin, step, weight, filter_ori)
-    end = time.clock()
+    end = time.perf_counter()
     
     print("Time: %f" % (end - start))
     
