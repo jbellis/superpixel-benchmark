@@ -95,10 +95,10 @@ def im_labelled_square_grid_points(size, step, margin=1):
     cells_im.fill(0)
     
     label = 1
-    for x in range(size[0]/step+1):
-        for y in range(size[1]/step+1):
-            center_x = np.min([ x*step + step/2, size[0]-1])
-            center_y = np.min([ y*step + step/2, size[1]-1])
+    for x in range(size[0]//step+1):
+        for y in range(size[1]//step+1):
+            center_x = np.min([ x*step + step//2, size[0]-1])
+            center_y = np.min([ y*step + step//2, size[1]-1])
             np_im[center_x, center_y] = label
             cells_im[x*step+margin:(x+1)*step-margin, y*step+margin:(y+1)*step-margin] = label
             label += 1
@@ -163,7 +163,7 @@ def demo_m_waterpixels(imin,  step,  d_weight, filter_ori):
 
     # Ori filtering
     if filter_ori is True:
-        my_area_filtering(imin, step*step/16)
+        my_area_filtering(imin, step*step//16)
 
     # Gradient computation
     im_grad = my_gradient(imin, basicse,  True)
@@ -175,7 +175,7 @@ def demo_m_waterpixels(imin,  step,  d_weight, filter_ori):
 
     # Compute cell centers and cells
     size = imin.getSize()
-    im_markers, im_cells = im_labelled_square_grid_points(size, step, step/6) 
+    im_markers, im_cells = im_labelled_square_grid_points(size, step, step//6) 
 
     ##-----------------------------------------------------------------------------------------
     ##-----------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ def demo_m_waterpixels(imin,  step,  d_weight, filter_ori):
     sp.dist(immask, imdist, gridse)
     #Step 2 : Adding the distance function to the gradient
     if d_weight > 0:
-        weight = d_weight * float(2)/step
+        weight = d_weight * 2/step
         sp.mul(imdist, weight, imdist)
         sp.add(imdist, im_grad, im_grad)
 
@@ -286,8 +286,7 @@ if __name__ == "__main__":
     imin = sp.Image(image_file_name)
     
     size = imin.getSize()
-    step = math.floor(0.5 + math.sqrt(size[0]*size[1] / superpixels))
-    step = int(step)
+    step = int(math.floor(0.5 + math.sqrt(size[0]*size[1] / superpixels)))
     
     start = time.perf_counter()
     imout, imgrad, imminima = demo_m_waterpixels(imin, step, weight, filter_ori)
