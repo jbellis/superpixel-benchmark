@@ -294,12 +294,6 @@ if __name__ == "__main__":
     
     print("Time: %f" % (end - start))
     
-    runtime_file = output + "/" + prefix + "runtime.txt"
-    with open(runtime_file, "a") as runtime_file_handle:
-        runtime_file_handle.write(str(end - start) + "\n")
-    
-    # sp.write(imout, "montagne_wp.png")
-    # imout.show()
     np_imout = imout.getNumArray().astype(int)
     
     csv_file = output + "/" + prefix + os.path.basename(os.path.splitext(image_file_name)[0]) + ".csv"
