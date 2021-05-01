@@ -293,7 +293,7 @@ if __name__ == "__main__":
     imout, imgrad, imminima = demo_m_waterpixels(imin, step, weight, filter_ori)
     end = time.clock()
     
-    print "Time: %f" % (end - start)
+    print("Time: %f" % (end - start))
     
     runtime_file = output + "/" + prefix + "runtime.txt"
     with open(runtime_file, "a") as runtime_file_handle:
